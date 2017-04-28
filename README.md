@@ -37,5 +37,12 @@ look_data = lc.run_look(1234)
 query_data = lc.run_query('5A0lg9e7U7SNN8fquk0JKz')
 ```
 
+The JSON results can be converted to a Pandas Dataframe:
+
+```python
+import pandas as pd
+df = pd.DataFrame(query_data)
+```
+
 [looker-api]: https://looker.com/docs/reference/api-and-integration
 [docs]: https://looker.com/docs/reference/api-and-integration/api-auth
