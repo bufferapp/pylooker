@@ -7,14 +7,14 @@ A basic Python interface to [Looker API][looker-api].
 You can use `pip` to install PyLooker.
 
 ```bash
-pip install git+https://github.com/github.com/bufferapp/pylooker
+pip install git+https://github.com/bufferapp/pylooker
 ```
 
 If you prefer, you can clone it and run the setup.py file. Use the following
 commands to install PyLooker from Github:
 
 ```bash
-git clone https://github.com/github.com/bufferapp/pylooker
+git clone https://github.com/bufferapp/pylooker
 cd pylooker
 python setup.py install
 ```
