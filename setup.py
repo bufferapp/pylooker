@@ -12,4 +12,5 @@ setup(
     author_email='davidgasquez@gmail.com',
     url='https://github.com/bufferapp/pylooker',
     keywords=['looker'],
+    install_requires=['requests']
 )
