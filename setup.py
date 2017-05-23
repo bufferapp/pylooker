@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pylooker',
-    packages=[],
+    packages=['pylooker'],
     version='0.1.0',
     description='A Python interface to Looker API',
     author='David Gasquez',
