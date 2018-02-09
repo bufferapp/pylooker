@@ -43,7 +43,7 @@ class LookerClient(object):
 
         return headers
 
-    def run_look(self, look_id, format='json', limit=-1):
+    def run_look(self, look_id, format='json', limit=-1, apply_formatting=False, cache=False, apply_vis=False):
         """Get the result of running the specified look.
 
         Parameters
@@ -55,15 +55,24 @@ class LookerClient(object):
         limit : int
             Limit the number of rows returned. Defaults to -1 to return all the
             results
+        apply_formatting: boolean
+        	Apply model-specified formatting to each result.
+        apply_vis: boolean
+            Apply visualization options to results.
+        cache:
+            Get results from cache if available.
         """
         headers = self._get_headers()
 
         response = requests.get(
-            url='{}{}/run/{}?limit={}'.format(
+            url='{}{}/run/{}?limit={}&apply_formatting={}&apply_vis={}&cache={}'.format(
                 self.api_endpoint + 'looks/',
                 look_id,
                 format,
-                limit
+                limit,
+                apply_formatting,
+                apply_vis,
+                cache
             ),
             headers=headers
         )
