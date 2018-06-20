@@ -35,7 +35,8 @@ class LookerClient(object):
             data={
                 'client_id': self.client_id,
                 'client_secret': self.client_secret
-            }
+            },
+            verify=False
         )
 
         token = token_request.json()['access_token']
@@ -74,6 +75,7 @@ class LookerClient(object):
                 apply_vis,
                 cache
             ),
+            verify=False,
             headers=headers
         )
 
@@ -98,6 +100,7 @@ class LookerClient(object):
 
         slug_response = requests.get(
             url=self.api_endpoint + '/queries/slug/' + slug,
+            verify=False,
             headers=headers
         )
 
@@ -108,6 +111,7 @@ class LookerClient(object):
                 format,
                 limit
             ),
+            verify=False,
             headers=headers
         )
 
