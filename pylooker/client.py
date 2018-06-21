@@ -29,11 +29,15 @@ class LookerClient(object):
         self.api_endpoint = api_endpoint
         self.client_id = client_id
         self.client_secret = client_secret
+        self.verify = verify
 
     def _get_headers(self):
         token_request = requests.post(
             url=self.api_endpoint + "login",
-            data={"client_id": self.client_id, "client_secret": self.client_secret},
+            data={
+                "client_id": self.client_id,
+                "client_secret": self.client_secret
+            },
             verify=self.verify,
         )
 
