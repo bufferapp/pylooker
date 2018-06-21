@@ -24,27 +24,33 @@ class LookerClient(object):
     >>> client_secret = 'your-client-secret'
     >>> lc = LookerClient(api_endpoint, client_id, client_secret)
     """
-    def __init__(self, api_endpoint, client_id, client_secret):
+
+    def __init__(self, api_endpoint, client_id, client_secret, verify=True):
         self.api_endpoint = api_endpoint
         self.client_id = client_id
         self.client_secret = client_secret
 
     def _get_headers(self):
         token_request = requests.post(
-            url=self.api_endpoint+'login',
-            data={
-                'client_id': self.client_id,
-                'client_secret': self.client_secret
-            },
-            verify=False
+            url=self.api_endpoint + "login",
+            data={"client_id": self.client_id, "client_secret": self.client_secret},
+            verify=self.verify,
         )
 
-        token = token_request.json()['access_token']
-        headers = {'Authorization': 'token ' + token}
+        token = token_request.json()["access_token"]
+        headers = {"Authorization": "token " + token}
 
         return headers
 
-    def run_look(self, look_id, format='json', limit=-1, apply_formatting=False, cache=False, apply_vis=False):
+    def run_look(
+        self,
+        look_id,
+        format="json",
+        limit=-1,
+        apply_formatting=False,
+        cache=False,
+        apply_vis=False,
+    ):
         """Get the result of running the specified look.
 
         Parameters
@@ -57,7 +63,7 @@ class LookerClient(object):
             Limit the number of rows returned. Defaults to -1 to return all the
             results
         apply_formatting: boolean
-        	Apply model-specified formatting to each result.
+            Apply model-specified formatting to each result.
         apply_vis: boolean
             Apply visualization options to results.
         cache:
@@ -66,22 +72,22 @@ class LookerClient(object):
         headers = self._get_headers()
 
         response = requests.get(
-            url='{}{}/run/{}?limit={}&apply_formatting={}&apply_vis={}&cache={}'.format(
-                self.api_endpoint + 'looks/',
+            url="{}{}/run/{}?limit={}&apply_formatting={}&apply_vis={}&cache={}".format(
+                self.api_endpoint + "looks/",
                 look_id,
                 format,
                 limit,
                 apply_formatting,
                 apply_vis,
-                cache
+                cache,
             ),
-            verify=False,
-            headers=headers
+            verify=self.verify,
+            headers=headers,
         )
 
         return response.json()
 
-    def run_query(self, slug, format='json', limit=-1):
+    def run_query(self, slug, format="json", limit=-1):
         """Get the result of running the specified query.
 
         Parameters
@@ -99,20 +105,20 @@ class LookerClient(object):
         headers = self._get_headers()
 
         slug_response = requests.get(
-            url=self.api_endpoint + '/queries/slug/' + slug,
-            verify=False,
-            headers=headers
+            url=self.api_endpoint + "/queries/slug/" + slug,
+            verify=self.verify,
+            headers=headers,
         )
 
         response = requests.get(
-            url='{}{}/run/{}?limit={}'.format(
-                self.api_endpoint + 'queries/',
-                slug_response.json()['id'],
+            url="{}{}/run/{}?limit={}".format(
+                self.api_endpoint + "queries/",
+                slug_response.json()["id"],
                 format,
-                limit
+                limit,
             ),
-            verify=False,
-            headers=headers
+            verify=self.verify,
+            headers=headers,
         )
 
         return response.json()
