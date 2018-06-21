@@ -2,6 +2,8 @@ language: python
 
 python: 3.6
 
+script: pip install -e .
+
 deploy:
   provider: pypi
   user: $PYPI_USERNAME
