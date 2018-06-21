@@ -1,5 +1,7 @@
 # PyLooker
 
+[![Build Status](https://travis-ci.org/bufferapp/pylooker.svg?branch=master)](https://travis-ci.org/bufferapp/pylooker)
+
 A basic Python interface to [Looker API][looker-api].
 
 ## Installation
